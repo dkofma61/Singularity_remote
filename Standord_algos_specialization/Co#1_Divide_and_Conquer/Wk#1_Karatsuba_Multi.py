@@ -1,13 +1,13 @@
 def K_Multiply(x, y):
     x_str = str(x)
     y_str = str(y)
-    padded = False
-    if len(x_str) > len(y_str):
-        padded = True
-        y_str += "0"
-    if len(y_str) > len(x_str):
-        padded = True
-        x_str += "0"
+    padded = 0
+    while len(x_str) != len(y_str):
+        padded -= 1
+        if len(x_str) > len(y_str):
+            y_str += "0"
+        else:
+            x_str += "0"
     if (len(x_str) == 1) and (len(y_str) == 1):
         return x * y
     else:
@@ -27,10 +27,10 @@ def K_Multiply(x, y):
             + (step2)
             + (step4 * 10 ** (len(x_str[mid_x:])))
         )
-        if padded:
+        if padded != 0:
             if result != 0:
                 result_str = str(result)
-                result_fix = int(result_str[:-1])
+                result_fix = int(result_str[:padded])
                 return result_fix
         return result
 
@@ -43,3 +43,5 @@ print(
     )
 )
 # """
+
+# print(K_Multiply(19, 99999))
